@@ -58,6 +58,10 @@ class Level:
                         sprite = Enemy(TILESIZE,x,y,[self.visible_sprites,self.active_sprites])
                     if type == 'Constraints':
                         sprite = Tile(TILESIZE,x,y,self.active_sprites)
+                    if type == 'Screen':
+                        sprite = Tile(TILESIZE,x,y,[self.active_sprites,self.collision_sprites])
+                    if type == 'Death':
+                        sprite = Tile(TILESIZE,x,y,self.active_sprites)
                     sprite_group.add(sprite)
         return sprite_group
 
@@ -99,7 +103,7 @@ class Level:
         # player setup
         self.player_setup(player_layout,change_health)
         self.terrain_sprites = self.create_tile_group(terrain_layout,'Terrain')
-        self.water = Water(HEIGHT + 120, level_width,self.visible_sprites)
+        self.water = Water(HEIGHT + 120, level_width,self.visible_sprites) 
         # grass
         grass_layout = import_csv_layout(level_data['Grass'])
         self.grass_sprites = self.create_tile_group(grass_layout,'Grass')
@@ -115,11 +119,17 @@ class Level:
         # enemies
         enemy_layout = import_csv_layout(level_data['Enemies'])
         self.enemy_sprites = self.create_tile_group(enemy_layout,'Enemies')      
-        # constraint
-        constraint_layout = import_csv_layout(level_data['Constraints'])
-        self.constraint_sprites = self.create_tile_group(constraint_layout,'Constraints')       
+        # enemy constraints
+        enemy_constraint_layout = import_csv_layout(level_data['Constraints'])
+        self.enemy_constraint_sprites = self.create_tile_group(enemy_constraint_layout,'Constraints')
+        # screeen constraints
+        screen_constraint_layout = import_csv_layout(level_data['Screen'])
+        self.screen_constraint_sprites = self.create_tile_group(screen_constraint_layout,'Screen')
+        # death constraints
+        death_constraint_layout = import_csv_layout(level_data['Death'])
+        self.death_constraint_sprites = self.create_tile_group(death_constraint_layout,'Death')     
         # collisions
-        collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites()
+        collidable_sprites = self.terrain_sprites.sprites() + self.crate_sprites.sprites() + self.fg_palm_sprites.sprites() + self.screen_constraint_sprites.sprites()
         self.collision_sprites.add(collidable_sprites)
 
     def enemy_collision_reverse(self):
@@ -158,7 +168,7 @@ class Level:
             self.dust_sprite.add(fall_dust_particle)
 
     def check_death(self):
-        if self.player.sprite.rect.top > HEIGHT: self.create_overworld(self.current_level,0)
+        if pygame.sprite.spritecollide(self.player.sprite,self.death_constraint_sprites,False): self.create_overworld(self.current_level,0)
 
     def check_win(self):
         if pygame.sprite.spritecollide(self.player.sprite,self.goal,False): self.create_overworld(self.current_level,self.new_max_level)
