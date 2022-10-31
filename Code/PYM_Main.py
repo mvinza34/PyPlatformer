@@ -3,6 +3,7 @@ from PYM_Settings import *
 from PYM_Level import Level
 from PYM_Overworld import Overworld
 from PYM_UI import UI
+from PYM_Decoration import Sky
 
 # Ensures that all assets will import properly 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +63,8 @@ class Game:
             self.overworld_bg_music.play(loops = -1)
             
     def title_screen(self):
+        self.sky = Sky(8)
+        self.sky.draw(self.screen)
         title_surf = self.font.render("Platformer",False,(0,0,0))
         title_rect = title_surf.get_rect(center = (620,150))
         self.screen.blit(title_surf,title_rect)	
