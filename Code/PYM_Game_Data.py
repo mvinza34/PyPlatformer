@@ -6,6 +6,8 @@ level_0 = {
 		'Crates': '../Levels/0/Level_0_Crates.csv',
 		'Enemies':'../Levels/0/Level_0_Enemies.csv',
 		'Constraints':'../Levels/0/Level_0_Constraints.csv',
+		'Screen':'../Levels/0/Level_0_Screen.csv',
+		'Death':'../Levels/0/Level_0_Death.csv',
 		'Player': '../Levels/0/Level_0_Player.csv',
 		'Grass': '../Levels/0/Level_0_Grass.csv',
 		'node_pos': (110,400),
@@ -20,11 +22,15 @@ level_1 = {
 		'Crates': '../Levels/1/level_1_crates.csv',
 		'Enemies':'../Levels/1/level_1_enemies.csv',
 		'Constraints':'../Levels/1/level_1_constraints.csv',
+		'Screen':'../Levels/1/Level_1_Screen.csv',
+		'Death':'../Levels/1/Level_1_Death.csv',
 		'Player': '../Levels/1/level_1_player.csv',
 		'Grass': '../Levels/1/level_1_grass.csv',
 		'node_pos': (300,220),
 		'unlock': 2,
 		'node_graphics': '../Graphics/Overworld/1'}
+
+### levels 2-5 to be updated ###
 
 level_2 = {
 		'Terrain': '../Levels/2/level_2_terrain.csv',
@@ -38,7 +44,7 @@ level_2 = {
 		'Grass': '../Levels/2/level_2_grass.csv',
 		'node_pos': (480,610),
 		'unlock': 3,
-		'node_graphics': '../Graphics/Overworld/2'}
+		'node_graphics': '../Graphics/Overworld/2'}		
 
 level_3 = {
 		'Terrain': '../Levels/2/level_2_terrain.csv',
